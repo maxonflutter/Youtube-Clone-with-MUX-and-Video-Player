@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../repositories/video_repository.dart';
+import '../services/video_client.dart';
 import '../widgets/app_nav_bar.dart';
 
 class MuxShortsScreen extends StatefulWidget {
@@ -15,38 +17,41 @@ class _MuxShortsScreenState extends State<MuxShortsScreen> {
   final List<VideoPlayerController> _controllers = [];
   final List<ValueNotifier<double>> _progressIndicators = [];
 
+  bool loading = true;
+
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+    _loadVideos();
+  }
 
-    // String playbackId = assetData.playbackIds[0].id;
+  Future<void> _loadVideos() async {
+    final videos = await VideoRepository(client: VideoClient()).getVideos();
 
-    // DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
-    //     int.parse(assetData.createdAt) * 1000);
-    // DateFormat formatter = DateFormat.yMd().add_jm();
-    // dateTimeString = formatter.format(dateTime);
+    for (var videoPath in videos) {
+      final url = Uri.parse(
+        '${VideoClient.muxStreamBaseUrl}/${videoPath.playbackId}.${VideoClient.videoExtension}',
+      );
 
-    for (var videoPath in [
-      'https://stream.mux.com/X00LQSIx9elquxTQEX02FaW7xDlsJZh6iUqBwvihQ9nVQ.m3u8',
-      'https://stream.mux.com/QnV4dLt8wowBf4xVGwUzDc8fPQVAEUS7gVa9VpfTAZU.m3u8',
-      'https://stream.mux.com/Z02qixunSiuC4QbgAeHuxBDUkXobnxLgUVAR2ZGl29cU.m3u8',
-    ]) {
-      VideoPlayerController controller = VideoPlayerController.networkUrl(
-        Uri.parse(videoPath),
-      )..initialize().then((_) {
+      VideoPlayerController controller = VideoPlayerController.networkUrl(url)
+        ..initialize().then((_) {
           setState(() {});
-        });
-      controller.play();
-      controller.setLooping(true);
+        })
+        ..play()
+        ..setLooping(true);
 
       _controllers.add(controller);
+      print(_controllers.length);
       _progressIndicators.add(ValueNotifier<double>(0.0));
-
       controller.addListener(() {
         _updateProgress(controller);
       });
     }
+
+    setState(() {
+      loading = false;
+    });
   }
 
   void _updateProgress(VideoPlayerController controller) {
@@ -55,27 +60,6 @@ class _MuxShortsScreenState extends State<MuxShortsScreen> {
       double progress = controller.value.position.inSeconds /
           controller.value.duration.inSeconds;
       _progressIndicators[controllerIndex].value = progress;
-    }
-  }
-
-  void _loadMoreVideos() {
-    List<String> moreVideoPaths = [
-      'assets/videos/video_4.mp4',
-      'assets/videos/video_5.mp4',
-      'assets/videos/video_6.mp4',
-    ];
-
-    for (var videoPath in moreVideoPaths) {
-      VideoPlayerController controller = VideoPlayerController.asset(videoPath)
-        ..initialize().then((_) {
-          setState(() {});
-        });
-      _controllers.add(controller);
-      _progressIndicators.add(ValueNotifier<double>(0.0));
-
-      controller.addListener(() {
-        _updateProgress(controller);
-      });
     }
   }
 
@@ -115,7 +99,7 @@ class _MuxShortsScreenState extends State<MuxShortsScreen> {
             }
           }
           if (value >= _controllers.length - 1) {
-            _loadMoreVideos();
+            _loadVideos();
           }
         },
         itemBuilder: (context, index) {
