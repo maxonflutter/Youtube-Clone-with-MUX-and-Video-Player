@@ -8,7 +8,10 @@ class AppNavBar extends StatelessWidget {
     return NavigationBarTheme(
       data: NavigationBarThemeData(
         labelTextStyle: MaterialStatePropertyAll(
-          Theme.of(context).textTheme.bodySmall,
+          Theme.of(context)
+              .textTheme
+              .bodySmall!
+              .copyWith(letterSpacing: 0.5, fontSize: 10),
         ),
       ),
       child: NavigationBar(
@@ -35,19 +38,19 @@ class AppNavBar extends StatelessWidget {
               ),
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              Icons.add,
-            ),
+            child: Icon(Icons.add),
           ),
           const NavigationDestination(
-            icon: Icon(Icons.home_outlined),
+            icon: Icon(Icons.subscriptions_outlined),
             label: 'Subscriptions',
-            selectedIcon: Icon(Icons.home),
+            selectedIcon: Icon(Icons.subscriptions),
           ),
           const NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-            selectedIcon: Icon(Icons.home),
+            icon: CircleAvatar(
+              radius: 16,
+              child: Text('M'),
+            ),
+            label: 'You',
           ),
         ],
       ),
