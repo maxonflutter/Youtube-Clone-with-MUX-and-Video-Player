@@ -58,27 +58,20 @@ class AppTheme {
     final headingFont = GoogleFonts.merriweatherTextTheme(textTheme);
 
     return bodyFont.copyWith(
-      headline1: headingFont.headline1,
-      headline2: headingFont.headline2,
-      headline3: headingFont.headline3,
-      headline4: headingFont.headline4,
-      headline5: headingFont.headline5,
-      headline6: headingFont.headline6,
-      subtitle1: headingFont.subtitle1,
-      bodyText1: bodyFont.bodyText1,
-      bodyText2: bodyFont.bodyText2,
-      caption: bodyFont.caption,
-      button: bodyFont.button,
-      subtitle2: bodyFont.subtitle2,
-      overline: bodyFont.overline,
+      headlineLarge: headingFont.headlineLarge,
+      headlineMedium: headingFont.headlineMedium,
+      headlineSmall: headingFont.headlineSmall,
+      bodyLarge: headingFont.bodyLarge,
+      bodyMedium: bodyFont.bodyMedium,
+      bodySmall: bodyFont.bodySmall,
     );
   }
 
   ElevatedButtonThemeData get _elevatedButtonTheme {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        primary: _colorScheme.primary,
-        onPrimary: _colorScheme.onPrimary,
+        backgroundColor: _colorScheme.primary,
+        foregroundColor: _colorScheme.onPrimary,
         textStyle: GoogleFonts.workSans(),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -90,8 +83,8 @@ class AppTheme {
   TextButtonThemeData get _textButtonTheme {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        primary: _colorScheme.primary,
-        onSurface: _colorScheme.onSurface,
+        backgroundColor: _colorScheme.primary,
+        foregroundColor: _colorScheme.onSurface,
         textStyle: GoogleFonts.merriweather(),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -105,28 +98,28 @@ class AppTheme {
       labelStyle: GoogleFonts.workSans(),
       helperStyle: GoogleFonts.merriweather(),
       hintStyle: GoogleFonts.workSans(),
-      contentPadding: EdgeInsets.all(12.0),
+      contentPadding: const EdgeInsets.all(12.0),
       prefixStyle: GoogleFonts.workSans(),
       suffixStyle: GoogleFonts.workSans(),
       filled: true,
       fillColor: _colorScheme.primary,
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide(
-          color: Colors.transparent,
-        ),
+        borderRadius: BorderRadius.circular(32.0),
+        borderSide: const BorderSide(color: Colors.transparent),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(32.0),
         borderSide: BorderSide(
           color: _colorScheme.secondary,
         ),
       ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(32.0),
+        borderSide: BorderSide.none,
+      ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide(
-          color: Colors.red,
-        ),
+        borderSide: const BorderSide(color: Colors.red),
       ),
       border: InputBorder.none,
     );

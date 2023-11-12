@@ -48,14 +48,8 @@ class Video extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        id,
-        title,
-        description,
-        createdAt,
-        muxId,
-        muxAsset,
-      ];
+  List<Object?> get props =>
+      [id, title, description, createdAt, muxId, muxAsset];
 
   static List<Map<String, dynamic>> sampleVideos = [
     {

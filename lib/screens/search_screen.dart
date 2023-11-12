@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
-  @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -23,26 +18,14 @@ class _SearchScreenState extends State<SearchScreen> {
           margin: const EdgeInsets.only(bottom: 4.0),
           child: TextFormField(
             decoration: InputDecoration(
+              filled: true,
+              fillColor: colorScheme.secondaryContainer.withAlpha(100),
               hintText: 'Search YouTube',
               hintStyle: Theme.of(context)
                   .textTheme
                   .bodyMedium!
                   .copyWith(color: Colors.white.withAlpha(150)),
               contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(32.0),
-                borderSide: BorderSide.none,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(32.0),
-                borderSide: BorderSide.none,
-              ),
-              disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(32.0),
-                borderSide: BorderSide.none,
-              ),
-              fillColor: colorScheme.secondaryContainer.withAlpha(100),
-              filled: true,
             ),
           ),
         ),
@@ -67,9 +50,10 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             title: Text(
               'Item $index',
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: Colors.white,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.white),
             ),
           );
         },

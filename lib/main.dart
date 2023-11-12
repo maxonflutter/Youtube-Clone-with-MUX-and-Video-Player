@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'screens/mux_shorts_screen.dart';
 import 'screens/search_screen.dart';
+import 'screens/shorts_screen.dart';
 import 'shared/theme.dart';
 
 void main() {
@@ -18,8 +18,7 @@ class MyApp extends StatelessWidget {
       theme: const AppTheme().themeData,
       initialRoute: '/shorts',
       routes: {
-        // '/shorts': (context) => const ShortsScreen(),
-        '/shorts': (context) => const MuxShortsScreen(),
+        '/shorts': (context) => const ShortsScreen(),
         '/search': (context) => const SearchScreen(),
       },
     );
