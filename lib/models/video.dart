@@ -63,28 +63,21 @@ class Video extends Equatable {
       "title": "Exploring the Mountains",
       "description": "A journey through the landscapes of the mountains.",
       "created_at": "2023-11-01",
-      "muxId": "mKGU02YvT7Wh1gbX6zyvceRcaDF02BSh81zxr72eo9CFQ",
+      "muxId": "8tumBO7l9FIkfH4JgeMP02uVMI01lkXzjtecJLjcQR00VU",
     },
     {
       "id": "2",
       "title": "Urban Adventures",
       "description": "Discover the hidden gems of city life.",
       "created_at": "2023-11-01",
-      "muxId": "700qOTgjT01Be4f9a1UCFeGBw3NIOHb5GLncp7hK4c5Uk",
+      "muxId": "iiBni2RLCiQNGjBVyXE49Gkg02ikFiRikELvA00V3wuqM",
     },
     {
       "id": "3",
       "title": "Ocean Wonders",
       "description": "Exploring the mysteries of the ocean.",
       "created_at": "2023-1-01",
-      "muxId": "eQ027icxueTuklSx01wmrEQEvU4Mj4TcQeF19k2t7202KQ",
+      "muxId": "IprX02B00To6EixdmFw02cKtyeANRbpw3y0086GXGJm3odg",
     },
-    {
-      "id": "4",
-      "title": "Rainforest Treasures",
-      "description": "A journey through the rainforest.",
-      "created_at": "2023-11-01",
-      "muxId": "NnIcvc02eTiI8YrfnPZ2HgGLbO02TWWPmevtuXxqwVsRM",
-    }
   ];
 }

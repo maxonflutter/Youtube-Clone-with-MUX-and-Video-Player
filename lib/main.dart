@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'screens/mux_shorts_screen.dart';
+import 'screens/search_screen.dart';
+import 'shared/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,11 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MuxShortsScreen(),
+      theme: const AppTheme().themeData,
+      initialRoute: '/shorts',
+      routes: {
+        // '/shorts': (context) => const ShortsScreen(),
+        '/shorts': (context) => const MuxShortsScreen(),
+        '/search': (context) => const SearchScreen(),
+      },
     );
   }
 }

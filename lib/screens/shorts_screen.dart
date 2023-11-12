@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 import '../widgets/app_nav_bar.dart';
+import '../widgets/video_actions.dart';
+import '../widgets/video_options_modal.dart';
 
 class ShortsScreen extends StatefulWidget {
   const ShortsScreen({super.key});
@@ -24,37 +26,10 @@ class _ShortsScreenState extends State<ShortsScreen> {
       'assets/videos/video_1.mp4',
       'assets/videos/video_2.mp4',
       'assets/videos/video_3.mp4',
-    ]) {
-      VideoPlayerController controller = VideoPlayerController.asset(videoPath)
-        ..initialize().then((_) {
-          setState(() {});
-        });
-      _controllers.add(controller);
-      _progressIndicators.add(ValueNotifier<double>(0.0));
-
-      controller.addListener(() {
-        _updateProgress(controller);
-      });
-    }
-  }
-
-  void _updateProgress(VideoPlayerController controller) {
-    int controllerIndex = _controllers.indexOf(controller);
-    if (controllerIndex != -1) {
-      double progress = controller.value.position.inSeconds /
-          controller.value.duration.inSeconds;
-      _progressIndicators[controllerIndex].value = progress;
-    }
-  }
-
-  void _loadMoreVideos() {
-    List<String> moreVideoPaths = [
       'assets/videos/video_4.mp4',
       'assets/videos/video_5.mp4',
       'assets/videos/video_6.mp4',
-    ];
-
-    for (var videoPath in moreVideoPaths) {
+    ]) {
       VideoPlayerController controller = VideoPlayerController.asset(videoPath)
         ..initialize().then((_) {
           setState(() {});
@@ -86,7 +61,36 @@ class _ShortsScreenState extends State<ShortsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text('Shorts'),
+        surfaceTintColor: Colors.transparent,
+        elevation: 0.0,
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, '/search'),
+            icon: const Icon(
+              Icons.search,
+              size: 32,
+              color: Colors.white,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                elevation: 0.0,
+                backgroundColor: Colors.transparent,
+                builder: (context) {
+                  return const VideoOptionsModal();
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.more_vert,
+              size: 32,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(width: 8.0),
+        ],
       ),
       extendBodyBehindAppBar: true,
       body: PageView.builder(
@@ -102,12 +106,15 @@ class _ShortsScreenState extends State<ShortsScreen> {
               _controllers[i].pause();
             }
           }
-          if (value >= _controllers.length - 1) {
+          if (value >= _controllers.length - 3) {
             _loadMoreVideos();
           }
         },
         itemBuilder: (context, index) {
           VideoPlayerController controller = _controllers[index];
+          controller
+            ..play()
+            ..setLooping(true);
           return controller.value.isInitialized
               ? Stack(
                   fit: StackFit.expand,
@@ -132,6 +139,10 @@ class _ShortsScreenState extends State<ShortsScreen> {
                         },
                       ),
                     ),
+                    const Align(
+                      alignment: Alignment.bottomRight,
+                      child: VideoActions(),
+                    ),
                   ],
                 )
               : Container(
@@ -142,5 +153,39 @@ class _ShortsScreenState extends State<ShortsScreen> {
       ),
       bottomNavigationBar: const AppNavBar(),
     );
+  }
+
+  void _updateProgress(VideoPlayerController controller) {
+    int controllerIndex = _controllers.indexOf(controller);
+    if (controllerIndex != -1) {
+      double progress = controller.value.position.inSeconds /
+          controller.value.duration.inSeconds;
+      _progressIndicators[controllerIndex].value = progress;
+    }
+  }
+
+  void _loadMoreVideos() {
+    List<String> moreVideoPaths = [
+      'assets/videos/video_1.mp4',
+      'assets/videos/video_2.mp4',
+      'assets/videos/video_3.mp4',
+      'assets/videos/video_4.mp4',
+      'assets/videos/video_5.mp4',
+      'assets/videos/video_6.mp4',
+    ];
+
+    for (var videoPath in moreVideoPaths) {
+      VideoPlayerController controller = VideoPlayerController.asset(videoPath)
+        ..initialize().then((_) {
+          setState(() {});
+        });
+
+      _controllers.add(controller);
+      _progressIndicators.add(ValueNotifier<double>(0.0));
+
+      controller.addListener(() {
+        _updateProgress(controller);
+      });
+    }
   }
 }
