@@ -83,6 +83,7 @@ class _VideoActionButton extends StatelessWidget {
           ),
           Text(
             label,
+            maxLines: 1,
             style: Theme.of(context)
                 .textTheme
                 .bodySmall!

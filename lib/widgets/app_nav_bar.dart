@@ -5,27 +5,43 @@ class AppNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return NavigationBarTheme(
       data: NavigationBarThemeData(
         labelTextStyle: MaterialStatePropertyAll(
-          Theme.of(context)
-              .textTheme
-              .bodySmall!
-              .copyWith(letterSpacing: 0.5, fontSize: 10),
+          Theme.of(context).textTheme.bodySmall!.copyWith(
+                letterSpacing: 0.5,
+                fontSize: 10,
+                color: colorScheme.onSecondary,
+              ),
         ),
       ),
       child: NavigationBar(
+        backgroundColor: colorScheme.secondary,
+        surfaceTintColor: Colors.transparent,
         height: 60,
         destinations: [
-          const NavigationDestination(
-            icon: Icon(Icons.home_outlined),
+          NavigationDestination(
+            icon: Icon(
+              Icons.home_outlined,
+              color: colorScheme.onSecondary,
+            ),
             label: 'Home',
-            selectedIcon: Icon(Icons.home),
+            selectedIcon: Icon(
+              Icons.home,
+              color: colorScheme.onSecondary,
+            ),
           ),
-          const NavigationDestination(
-            icon: Icon(Icons.youtube_searched_for_outlined),
+          NavigationDestination(
+            icon: Icon(
+              Icons.youtube_searched_for_outlined,
+              color: colorScheme.onSecondary,
+            ),
             label: 'Shorts',
-            selectedIcon: Icon(Icons.youtube_searched_for),
+            selectedIcon: Icon(
+              Icons.youtube_searched_for,
+              color: colorScheme.onSecondary,
+            ),
           ),
           Container(
             width: 40,
@@ -33,17 +49,26 @@ class AppNavBar extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(
-                color: Theme.of(context).colorScheme.primary,
-                width: 2,
+                color: colorScheme.onSecondary,
+                width: 1,
               ),
               shape: BoxShape.circle,
             ),
-            child: Icon(Icons.add),
+            child: Icon(
+              Icons.add,
+              color: colorScheme.onSecondary,
+            ),
           ),
-          const NavigationDestination(
-            icon: Icon(Icons.subscriptions_outlined),
+          NavigationDestination(
+            icon: Icon(
+              Icons.subscriptions_outlined,
+              color: colorScheme.onSecondary,
+            ),
             label: 'Subscriptions',
-            selectedIcon: Icon(Icons.subscriptions),
+            selectedIcon: Icon(
+              Icons.subscriptions,
+              color: colorScheme.onSecondary,
+            ),
           ),
           const NavigationDestination(
             icon: CircleAvatar(
