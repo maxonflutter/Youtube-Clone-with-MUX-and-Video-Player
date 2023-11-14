@@ -10,7 +10,6 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: _colorScheme,
       textTheme: _textTheme,
-      appBarTheme: AppBarTheme(color: _colorScheme.primary),
       inputDecorationTheme: _inputDecorationTheme,
       elevatedButtonTheme: _elevatedButtonTheme,
       textButtonTheme: _textButtonTheme,
@@ -61,7 +60,7 @@ class AppTheme {
       headlineLarge: headingFont.headlineLarge,
       headlineMedium: headingFont.headlineMedium,
       headlineSmall: headingFont.headlineSmall,
-      bodyLarge: headingFont.bodyLarge,
+      bodyLarge: bodyFont.bodyLarge,
       bodyMedium: bodyFont.bodyMedium,
       bodySmall: bodyFont.bodySmall,
     );
@@ -99,8 +98,6 @@ class AppTheme {
       helperStyle: GoogleFonts.merriweather(),
       hintStyle: GoogleFonts.workSans(),
       contentPadding: const EdgeInsets.all(12.0),
-      prefixStyle: GoogleFonts.workSans(),
-      suffixStyle: GoogleFonts.workSans(),
       filled: true,
       fillColor: _colorScheme.primary,
       enabledBorder: OutlineInputBorder(
