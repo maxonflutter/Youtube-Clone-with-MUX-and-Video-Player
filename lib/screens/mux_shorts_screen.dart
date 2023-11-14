@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:youtube_clone_with_mux_and_video_player/services/video_client.dart';
 
 import '../models/video.dart';
 import '../repositories/video_repository.dart';
+import '../services/video_client.dart';
 import '../widgets/app_nav_bar.dart';
 import '../widgets/video_actions.dart';
 import '../widgets/video_information.dart';

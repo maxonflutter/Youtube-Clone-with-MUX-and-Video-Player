@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'services/video_client.dart';
 
-import 'screens/search_screen.dart';
 import 'screens/mux_shorts_screen.dart';
+import 'screens/search_screen.dart';
 import 'shared/theme.dart';
 
 Future<void> main() async {
-  // final videoClient = VideoClient();
-  // final muxAssets = await videoClient.getMuxAssets();
-  // print(muxAssets);
   runApp(const MyApp());
 }
 
